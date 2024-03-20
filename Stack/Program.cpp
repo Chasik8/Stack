@@ -1,9 +1,12 @@
 #include"stack.h"
 using namespace Dominus;
+template<typename Type>
 int main() {
-	vector<int> v = {0,1};
-	Stack<int> a;
-	a.push(1);
-	delete& a;
+	CPU<Type> C;
+	//Stack<int> a;
+	//a.push(1);
+	//a.print();
+	////delete& a;
+	//cout << endl << "aa";
 	return 0;
 }

@@ -26,9 +26,18 @@
     <ClInclude Include="stack.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="commands.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="stack.inl">
+      <Filter>Файлы заголовков</Filter>
+    </None>
+    <None Include="commands.inl">
+      <Filter>Файлы заголовков</Filter>
+    </None>
+    <None Include="cpu.inl">
       <Filter>Файлы заголовков</Filter>
     </None>
   </ItemGroup>
