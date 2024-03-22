@@ -86,7 +86,7 @@ namespace Dominus {
 		}
 	}
 	template<typename Type>
-	Stack<Type> Stack<Type>::pop() {
+	Type Stack<Type>::pop() {
 		if (index == 0) {
 			return NULL;
 		}
@@ -94,12 +94,12 @@ namespace Dominus {
 		return arr[index];
 	}
 	template<typename Type>
-	Stack<Type> pop(const Stack<Type>& s) {
+	Type pop(const Stack<Type>& s) {
 		s.pop();
 		return true;
 	}
 	template<typename Type>
-	Stack<Type> Stack<Type>::top() {
+	Type Stack<Type>::top() {
 		if (index == 0) {
 			return NULL;
 		}

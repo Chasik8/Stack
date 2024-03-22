@@ -1,8 +1,10 @@
-#include"stack.h"
+#include"cpu.h"
 using namespace Dominus;
-template<typename Type>
+
 int main() {
-	CPU<Type> C;
+	Stack<Memory> m;
+	//CPU C;
+	//C.run();
 	//Stack<int> a;
 	//a.push(1);
 	//a.print();

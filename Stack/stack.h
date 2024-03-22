@@ -9,6 +9,7 @@
 #include"commands.h"
 using namespace std;
 namespace Dominus {
+
     template<typename Type>
     class Stack
     {
@@ -25,27 +26,15 @@ namespace Dominus {
         bool operator=(const Stack<Type>& inp);
         ~Stack();
         bool push(const Type inp);
-        Stack pop();
-        Stack top();
+        Type pop();
+        Type top();
         bool print();
     };
     template<typename Type>
     bool push(const Stack<Type>& s, const Type& inp);
     template<typename Type>
-    bool pop(const Stack<Type>& s);
-    template<typename Type>
-    class CPU {
-    private:
-        Stack<string> stack;
-        Stack<long long int> stack_point;
-        map<string, Type*> commands;
-        bool begin_flag;
-    public:
-        CPU();
-        ~CPU();
-        bool run();
-        bool input();
-    };
+    Type pop(const Stack<Type>& s);
+
 }
+
 #include"stack.inl"
-#include"cpu.inl"

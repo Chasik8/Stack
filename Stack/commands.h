@@ -1,32 +1,33 @@
 #pragma once
+#include"stack.h"
+#include"cpu.h"
 namespace Dominus {
-	class Begin {
-	public:
-		bool run(bool* begin_flag);
-	};
+	//class Element {
+	//public:
+	//	virtual void print() const = 0;
+	//	virtual ~Element() {}
+	//};
+	//enum class TokenType {
+	//	Begin,
+	//	End,
+	//};
 
-	class End {
-	public:
-		bool run(bool* begin_flag);
-	};
+	//class Token {
+	//private:
+	//	std::string value;
+	//	TokenType type;
+	//public:
+	//	Token(TokenType type, Element* element) : type(type), element(element) {}
+	//};
 
-	//class Push {
-	//public:
-	//	template<typename Type>
-	//	const bool run(Stack<Type>* stack, Type value);
-	//};
-	//class Begin {
-	//public:
-	//	const bool run(bool* begin_flag);
-	//};
-	//class Begin {
-	//public:
-	//	const bool run(bool* begin_flag);
-	//};
-	//class Begin {
-	//public:
-	//	const bool run(bool* begin_flag);
-	//};
+	class Begin;
+	class End;
+	class Push {
+	public:
+		bool run(Stack<Memory> stack, Memory value) ;
+	};
+	class Pop;
+	class Add;
 
 }
 #include"commands.inl"

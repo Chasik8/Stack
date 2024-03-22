@@ -1,36 +1,78 @@
 #include"commands.h"
 #include"stack.h"
-//#include<pair.h>
 namespace Dominus {
-	 bool Begin::run(bool* begin_flag) {
-		 try {
-			 *begin_flag = true;
-			 return true;
-		 }
-		 catch (...) {
-			 return false;
-		 }
-	}
-	 bool End::run(bool* begin_flag) {
-		 try {
-			*begin_flag = false;
-			return true;
-		 }
-		 catch (...) {
-			 return false;
-		 }
-	}
-	//template<typename Type>
-	//const bool Push::run(Stack<Type>* stack,Type value) {
-	//	stat->push(value);
+	class Begin {
+	public:
+		bool run(bool* begin_flag) {
+			try {
+				*begin_flag = true;
+				return true;
+			}
+			catch (...) {
+				return false;
+			}
+		}
+	};
+	class End {
+	public:
+		bool run(bool* begin_flag) {
+			try {
+				*begin_flag = false;
+				return true;
+			}
+			catch (...) {
+				return false;
+			}
+		}
+	};
+	//bool Push::run(Stack<Memory> stack, Memory value) {
+	//	try {
+	//		stack.push(value);
+	//		return true;
+	//	}
+	//	catch (...) {
+	//		return false;
+	//	}
 	//}
-	//const bool Begin::run(bool* begin_flag) {
-	//	*begin_flag = true;
-	//}
-	//const bool Begin::run(bool* begin_flag) {
-	//	*begin_flag = true;
-	//}
-	//const bool Begin::run(bool* begin_flag) {
-	//	*begin_flag = true;
-	//}
+	
+	//class Push {
+	//public:
+	//	bool run(Stack<Memory> stack, Memory value) {
+	//		try {
+	//			stack.push(value);
+	//			return true;
+	//		}
+	//		catch (...) {
+	//			return false;
+	//		}
+	//	}
+	//};
+	//class Pop {
+	//public:
+	//	Memory run(Stack<Memory> stack) {
+	//		try {
+	//			return stack.pop();
+	//		}
+	//		catch (...) {
+	//			
+	//			return *new Memory;
+	//		}
+	//	}
+	//};
+	//class Add {
+	//public:
+	//	bool run(Stack<Memory> stack) {
+	//		try {
+	//			Memory first = stack.pop();
+	//			Memory second = stack.top();
+	//			stack.push(first);
+	//			stack.push( *new Memory(first.get_int_value() + second.get_int_value()));
+	//			return true;
+	//		}
+	//		catch (...) {
+
+	//			return false;
+	//		}
+	//	}
+	//};
 }
