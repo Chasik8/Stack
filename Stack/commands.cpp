@@ -13,7 +13,27 @@
 	//		}
 	//	}
 	//};
-	bool Dominus::Push::run(Stack<Memory> stack, Memory value) {
+namespace Dominus {
+	bool Begin::run(bool* begin_flag) {
+		try {
+			*begin_flag = true;
+			return true;
+		}
+		catch (...) {
+			return false;
+		}
+	}
+	bool End::run(bool* begin_flag) {
+		try {
+			*begin_flag = false;
+			return true;
+		}
+		catch (...) {
+			return false;
+		}
+	}
+
+	bool Push::run(Stack<Memory> stack, Memory value) {
 		try {
 			stack.push(value);
 			return true;
@@ -22,33 +42,28 @@
 			return false;
 		}
 	}
-	namespace Dominus {
-	class Pop {
-	public:
-		Memory run(Stack<Memory> stack) {
-			try {
-				return stack.pop();
-			}
-			catch (...) {
-
-				return *new Memory;
-			}
+	bool Pop::run(Stack<Memory> stack) {
+		try {
+			stack.pop();
+			return true;
 		}
-	};
-	class Add {
-	public:
-		bool run(Stack<Memory> stack) {
-			try {
-				Memory first = stack.pop();
-				Memory second = stack.top();
-				stack.push(first);
-				stack.push(*new Memory(first.get_int_value() + second.get_int_value()));
-				return true;
-			}
-			catch (...) {
+		catch (...) {
 
-				return false;
-			}
+			return false;
 		}
-	};
+	}
+	bool Add::run(Stack<Memory> stack) {
+		try {
+			Memory first = stack.pop();
+			Memory second = stack.top();
+			stack.push(first);
+			stack.push(*new Memory(first.get_int_value() + second.get_int_value()));
+			return true;
+		}
+		catch (...) {
+
+			return false;
+		}
+	}
+	
 }

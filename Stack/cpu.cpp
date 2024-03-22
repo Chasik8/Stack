@@ -1,4 +1,4 @@
-#include"stack.h"
+#include"stack_dir/stack.h"
 #include"cpu.h"
 #include <fstream>
 #define _CRT_DISABLE_PERFCRIT_LOCKS

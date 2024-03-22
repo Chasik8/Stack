@@ -18,13 +18,13 @@
     <ClCompile Include="Program.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="stack.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="commands.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="memory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="cpu.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,12 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="stack.inl">
-      <Filter>Файлы заголовков</Filter>
-    </None>
-    <None Include="commands.inl">
-      <Filter>Файлы заголовков</Filter>
-    </None>
-    <None Include="cpu.inl">
       <Filter>Файлы заголовков</Filter>
     </None>
   </ItemGroup>

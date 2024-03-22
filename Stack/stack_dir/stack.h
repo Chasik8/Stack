@@ -6,7 +6,6 @@
 #include<map>
 #define _CRT_DISABLE_PERFCRIT_LOCKS
 #include<string>
-#include"commands.h"
 using namespace std;
 namespace Dominus {
 
@@ -37,4 +36,4 @@ namespace Dominus {
 
 }
 
-#include"stack.inl"
+#include"stack.ii"

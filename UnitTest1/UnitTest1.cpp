@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include"D:\Project\C++\VisualStudioproject\C++\HSE\algoritms\Stack\Stack\stack.h"
+#include"../Stack/stack_dir/stack.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest1

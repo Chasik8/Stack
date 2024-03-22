@@ -1,6 +1,7 @@
 #pragma once
-#include"stack.h"
+#include"stack_dir/stack.h"
 #include"cpu.h"
+#include"memory.h"
 namespace Dominus {
 	//class Element {
 	//public:
@@ -20,14 +21,25 @@ namespace Dominus {
 	//	Token(TokenType type, Element* element) : type(type), element(element) {}
 	//};
 
-	class Begin;
-	class End;
+	class Begin {
+	public:
+		bool run(bool* begin_flag);
+	};
+	class End {
+	public:
+		bool run(bool* begin_flag);
+	};
 	class Push {
 	public:
 		bool run(Stack<Memory> stack, Memory value) ;
 	};
-	class Pop;
-	class Add;
+	class Pop {
+	public:
+		bool run(Stack<Memory> stack);
+	};
+	class Add {
+	public:
+		bool run(Stack<Memory> stack);
+	};
 
 }
-#include"commands.inl"

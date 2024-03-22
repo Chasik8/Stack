@@ -1,5 +1,5 @@
 #pragma once
-#include"stack.h"
+#include"stack_dir/stack.h"
 #include <fstream>
 #include<string>
 #include"commands.h"
@@ -24,4 +24,3 @@ namespace Dominus {
         bool parser(string s, ifstream& file);
     };
 }
-#include"cpu.inl"
