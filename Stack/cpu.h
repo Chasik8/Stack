@@ -1,14 +1,14 @@
 #pragma once
-#include"stack_dir/stack.h"
+#include"stack.h"
 #include <fstream>
 #include<string>
 #include"commands.h"
-#include"memory.h"
+/*#include"memory.h"*/
 namespace Dominus {
     class CPU {
     private:
         Stack<Memory> stack;
-        Stack<long long int> stack_point;
+        map<std::string, long long int> stack_point;
         bool begin_flag;
         //map<string, Token> commands;
         Begin _begin;
@@ -16,11 +16,14 @@ namespace Dominus {
         Push _push;
         Add _add;
         Pop _pop;
+        Out _out;
+        Label _label;
+        Jeq _jeq;
     public:
         CPU();
         //~CPU();
         bool run();
         std::string input(ifstream& file);
-        bool parser(string s, ifstream& file);
+        bool parser(string s);
     };
 }

@@ -4,7 +4,7 @@ namespace Dominus{
 	long long int Memory::get_int_value() {
 		return int_value;
 	}
-	string Memory::get_string_value() {
+	std::string Memory::get_string_value() {
 		return string_value;
 	}
 	bool Memory::set_int_value(long long int value) {
@@ -16,7 +16,7 @@ namespace Dominus{
 			return false;
 		}
 	}
-	bool Memory::set_string_value(string value) {
+	bool Memory::set_string_value(std::string value) {
 		try {
 			string_value = value;
 			return true;
@@ -28,7 +28,7 @@ namespace Dominus{
 	Memory::Memory(long long int dig = 0) {
 		int_value = dig;
 	}
-	Memory::Memory(string str) {
+	Memory::Memory(std::string str) {
 		string_value = str;
 	}
 	Memory::Memory() {

@@ -1,4 +1,4 @@
-#include"stack_dir/stack.h"
+#include"stack.h"
 #include"cpu.h"
 #include <fstream>
 #define _CRT_DISABLE_PERFCRIT_LOCKS
@@ -8,11 +8,13 @@ namespace Dominus {
 	CPU::CPU() {
 		begin_flag = false;
 		stack = *new Stack<Memory>;
-		stack_point = *new Stack<long long int>;
+		stack_point = *new map<std::string,long long int>;
 		_begin = *new Begin;
 		_end = *new End;
 		_push = *new Push;
 		_add = *new Add;
+		_out = *new Out;
+		_jeq = *new Jeq;
 		//commands = {
 		//	{"BEGIN",new Token(TokenType::Begin,new Begin)}
 		//}
@@ -21,50 +23,79 @@ namespace Dominus {
 		string str;
 
 		char symbol = file.get();
-		while (symbol != ' ' && symbol != '\n')
+		while (symbol != '\n')
 		{
 			str += symbol;
 			symbol = file.get();
 		}
 		return str;
 	}
-	bool CPU::parser(string s, ifstream& file) {
+	string split(string str, long long int kol) {
+		string ans = "";
+		for (long long int i = 0, space = 0; i < str.size(); ++i) {
+			bool flag = false;
+			if (str[i] == ' ') {
+				++space;
+				flag = true;
+			}
+			if (space == kol) {
+				return ans;
+			}
+			if (flag) {
+				ans = "";
+			}
+			else {
+				ans += str[i];
+			}
+		}
+	}
+	bool CPU::parser(string s) {
+		string input = split(s, 0);
 		if (s == "BEGIN") {
 			_begin.run(&begin_flag);
 		}
 		else if (s == "END") {
 			_end.run(&begin_flag);
 		}
-		else if (s == "PUSH") {
-			string typ = input(file);
-			Memory value;
-			string str = input(file);
-			if (typ == "int") {
-				long long int dig = atoi(typ.c_str());
-				value.set_int_value(dig);
+		else if (begin_flag) {
+			if (s == "PUSH") {
+				string typ = split(s, 1);
+				Memory value;
+				string str = split(s, 2);
+				if (typ == "int") {
+					long long int dig = atoi(str.c_str());
+					value.set_int_value(dig);
+				}
+				else {
+					value.set_string_value(str);
+				}
+				_push.run(stack, value);
 			}
-			else {
-				value.set_string_value(str);
+			else if (s == "POP") {
+				_pop.run(stack);
 			}
-			_push.run(stack, value);
+			else if (s == "ADD") {
+				_add.run(stack);
+			}
+			else if (s == "LABEL") {
+				string str = split(s, 1);
+				_label.run(stack,stack_point, str);
+			}
+			else if (s == "OUT") {
+				_out.run(stack);
+			}
 		}
-		else if (s == "POP") {
-			_pop.run(stack);
-		}
-		else if (s == "ADD") {
-			_add.run(stack);
-		}
-
+		return true;
 	}
 	bool CPU::run() {
-		string inp;
-		cin >> inp;
+		string inp="input.txt";
+		//cin >> inp;
 		ifstream file(inp);
 		string key = "";
 		while (key != "END")
 		{
 			string key = input(file);
-			parser(key, file);
+			parser(key);
 		}
 		return true;
 	}

@@ -21,19 +21,21 @@ namespace Dominus {
         Stack();
         Stack(const Stack<Type>& inp);
         Stack(const Stack<Type>&& inp);
-        bool operator=(const Stack<Type>&& inp);
-        bool operator=(const Stack<Type>& inp);
+        Stack<Type>* operator=(const Stack<Type>&& inp);
+        Stack<Type>* operator=(const Stack<Type>& inp);
         ~Stack();
         bool push(const Type inp);
         Type pop();
         Type top();
         bool print();
+        bool clear();
+        long long int get_index();
     };
     template<typename Type>
-    bool push(const Stack<Type>& s, const Type& inp);
+    bool push(Stack<Type>& s, const Type& inp);
     template<typename Type>
     Type pop(const Stack<Type>& s);
 
 }
 
-#include"stack.ii"
+#include"stack.inl"

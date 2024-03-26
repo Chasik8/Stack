@@ -2,9 +2,9 @@
 using namespace Dominus;
 
 int main() {
-	Stack<Memory> m;
-	//CPU C;
-	//C.run();
+	//Stack<Memory> m;
+	CPU C;
+	C.run();
 	//Stack<int> a;
 	//a.push(1);
 	//a.print();

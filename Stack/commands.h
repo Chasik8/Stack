@@ -1,6 +1,6 @@
 #pragma once
-#include"stack_dir/stack.h"
-#include"cpu.h"
+#include"stack.h"
+//#include"cpu.h"
 #include"memory.h"
 namespace Dominus {
 	//class Element {
@@ -31,15 +31,26 @@ namespace Dominus {
 	};
 	class Push {
 	public:
-		bool run(Stack<Memory> stack, Memory value) ;
+		bool run(Stack<Memory>& stack, Memory value) ;
 	};
 	class Pop {
 	public:
-		bool run(Stack<Memory> stack);
+		bool run(Stack<Memory> &stack);
 	};
 	class Add {
 	public:
-		bool run(Stack<Memory> stack);
+		bool run(Stack<Memory>& stack);
 	};
-
+	class Label {
+	public:
+		bool run(Stack<Memory>& stack, map<string,long long int>& stack_point, string label);
+	};
+	class Out {
+	public:
+		bool run(Stack<Memory>& stack);
+	};
+	class Jeq {
+	public:
+		long long int run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label);
+	};
 }

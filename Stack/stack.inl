@@ -9,7 +9,11 @@ namespace Dominus {
 	}
 	template<typename Type>
 	Stack<Type>::Stack(const Stack<Type>& inp) {
-		arr = inp.arr;
+		delete[] arr;
+		arr = new Type[inp.len];
+		for (long long int i = 0; i < inp.index; ++i) {
+			arr[i] = inp.arr[i];
+		}
 		index = inp.index;
 		len = inp.len;
 	}
@@ -20,33 +24,45 @@ namespace Dominus {
 	}
 	template<typename Type>
 	Stack<Type>::Stack(const Stack<Type>&& inp) {
-		arr = inp.arr;
+		delete[] arr;
+		arr = new Type[inp.len];
+		for (long long int i = 0; i < inp.index; ++i) {
+			arr[i] = inp.arr[i];
+		}
 		index = inp.index;
 		len = inp.len;
 	}
 	template<typename Type>
-	bool Stack<Type>::operator= (const Stack<Type>&& inp) {
+	Stack<Type>* Stack<Type>::operator= (const Stack<Type>&& inp) {
 		if (&inp != this) {
-			arr = inp.arr;
+			delete[] arr;
+			arr = new Type[inp.len];
+			for (long long int i = 0; i < inp.index; ++i) {
+				arr[i] = inp.arr[i];
+			}
 			index = inp.index;
 			len = inp.len;
-			return true;
+			return  this;
 		}
-		return false;
+		return this;
 	}
 	template<typename Type>
-	bool Stack<Type>::operator= (const Stack<Type>& inp) {
+	Stack<Type>* Stack<Type>::operator= (const Stack<Type>& inp) {
 		if (&inp != this) {
-			arr = inp.arr;
+			delete[] arr;
+			arr = new Type[inp.len];
+			for (long long int i = 0; i < inp.index; ++i) {
+				arr[i] = inp.arr[i];
+			}
 			index = inp.index;
 			len = inp.len;
-			return true;
+			return this;
 		}
-		return false;
+		return this;
 	}
 	template<typename Type>
 	Stack<Type>::~Stack() {
-		//free(arr);
+		delete arr;
 		index = 0;
 		len = 0;
 	}
@@ -54,13 +70,15 @@ namespace Dominus {
 	bool Stack<Type>::push(const Type inp) {
 		try {
 			if (len == 0) {
-				arr = (Type*)malloc(sizeof(Type));
+				arr = new Type[1];
 				arr[0] = inp;
 				len = 1;
 				index = 1;
 			}
 			else if (index == len) {
-				realloc(arr,2 * len);
+				Type* arr_old = arr;
+				arr = new Type[2 * len];
+				delete[] arr_old;
 				len *= 2;
 				arr[index] = inp;
 				++index;
@@ -71,12 +89,12 @@ namespace Dominus {
 			}
 			return true;
 		}
-		catch (...){
+		catch(...) {
 			return false;
 		}
 	}
 	template<typename Type>
-	bool push(const Stack<Type>& s, const Type inp) {
+	bool push(Stack<Type>& s, const Type inp) {
 		try {
 			s.push(inp);
 			return true;
@@ -88,20 +106,20 @@ namespace Dominus {
 	template<typename Type>
 	Type Stack<Type>::pop() {
 		if (index == 0) {
-			return NULL;
+			return  *new Type;
 		}
 		--index;
 		return arr[index];
 	}
 	template<typename Type>
 	Type pop(const Stack<Type>& s) {
-		s.pop();
-		return true;
+		return s.pop();
 	}
 	template<typename Type>
 	Type Stack<Type>::top() {
 		if (index == 0) {
-			return NULL;
+			Type nul = *new Type;
+			return nul;
 		}
 		return arr[index-1];
 	}
@@ -116,5 +134,21 @@ namespace Dominus {
 		catch (...) {
 			return false;
 		}
+	}
+	template<typename Type>
+	bool Stack<Type>::clear() {
+		try {
+			delete[] arr;
+			len = 0;
+			index = 0;
+			return true;
+		}
+		catch (...) {
+			return false;
+		}
+	}
+	template<typename Type>
+	long long int Stack<Type>::get_index() {
+		return index;
 	}
 }
