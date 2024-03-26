@@ -23,6 +23,7 @@ namespace Dominus {
         Stack(const Stack<Type>&& inp);
         Stack<Type>* operator=(const Stack<Type>&& inp);
         Stack<Type>* operator=(const Stack<Type>& inp);
+        Type operator[](long long int i);
         ~Stack();
         bool push(const Type inp);
         Type pop();

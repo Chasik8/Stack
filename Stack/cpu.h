@@ -19,6 +19,7 @@ namespace Dominus {
         Out _out;
         Label _label;
         Jeq _jeq;
+        Jne _jne;
     public:
         CPU();
         //~CPU();

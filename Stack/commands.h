@@ -53,4 +53,8 @@ namespace Dominus {
 	public:
 		long long int run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label);
 	};
+	class Jne {
+	public:
+		long long int run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label);
+	};
 }

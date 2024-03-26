@@ -45,6 +45,8 @@ namespace Dominus {
 	bool Pop::run(Stack<Memory>& stack) {
 		try {
 			stack.pop();
+			Memory add("POP");
+			stack.push(add);
 			return true;
 		}
 		catch (...) {
@@ -58,6 +60,8 @@ namespace Dominus {
 			Memory second = stack.top();
 			stack.push(first);
 			stack.push(*new Memory(first.get_int_value() + second.get_int_value()));
+			Memory add("ADD");
+			stack.push(add);
 			return true;
 		}
 		catch (...) {
@@ -81,6 +85,8 @@ namespace Dominus {
 			else {
 				std::cout << stack.pop().get_int_value() << std::endl;
 			}
+			Memory add("OUT");
+			stack.push(add);
 			return true;
 		}
 		catch (...) {
@@ -89,15 +95,71 @@ namespace Dominus {
 	}
 	long long int Jeq::run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label) {
 		try {
-			Memory first = stack.pop();
-			if (first.get_string_value() != "" && stack.top().get_string_value() != "") {
-				if (first.get_int_value() == stack.pop().get_int_value()) {
-					Memory a("JEQ " + label);
-					stack.push(a);
-					return stack_point[label];
+			long long int index_search = stack.get_index()-1;
+			Memory first;
+			for (;; --index_search) {
+				first = stack[index_search];
+				if (stack[index_search].get_string_value() == "") {
+					break;
 				}
 			}
-			return stack.get_index();
+			--index_search;
+			Memory second;
+			for (;; --index_search) {
+				second = stack[index_search];
+				if (stack[index_search].get_string_value() == "") {
+					break;
+				}
+			}
+			if (first.get_string_value() == "" && second.get_string_value() == "") {
+				if (first.get_int_value() == second.get_int_value()) {
+					//Memory add("JEQ " + label);
+					//stack.push(add);
+					return stack_point[label];
+				}
+				else {
+					return -1;
+				}
+			}
+			else {
+				cout << "exit" << endl;
+			}
+		}
+		catch (...) {
+			return -1;
+		}
+	}
+	long long int Jne::run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label) {
+		try {
+			long long int index_search = stack.get_index() - 1;
+			Memory first;
+			for (; index_search >= 0; --index_search) {
+				first = stack[index_search];
+				if (stack[index_search].get_string_value() == "") {
+					break;
+				}
+			}
+			--index_search;
+			Memory second;
+			for (; index_search>=0; --index_search) {
+				second = stack[index_search];
+				if (stack[index_search].get_string_value() == "") {
+					break;
+				}
+			}
+			if (first.get_string_value() == "" && second.get_string_value() == "") {
+				if (first.get_int_value() != second.get_int_value()) {
+					//Memory add("JEQ " + label);
+					//stack.push(add);
+					return stack_point[label];
+				}
+				else {
+					return -1;
+				}
+			}
+			else {
+				cout << "exit" << endl;
+			}
 		}
 		catch (...) {
 			return -1;

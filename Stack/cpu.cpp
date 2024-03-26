@@ -15,6 +15,7 @@ namespace Dominus {
 		_add = *new Add;
 		_out = *new Out;
 		_jeq = *new Jeq;
+		_jne = *new Jne;
 		//commands = {
 		//	{"BEGIN",new Token(TokenType::Begin,new Begin)}
 		//}
@@ -32,7 +33,7 @@ namespace Dominus {
 	}
 	string split(string str, long long int kol) {
 		string ans = "";
-		for (long long int i = 0, space = 0; i < str.size(); ++i) {
+		for (long long int i = 0, space = -1; i < str.size(); ++i) {
 			bool flag = false;
 			if (str[i] == ' ') {
 				++space;
@@ -49,8 +50,8 @@ namespace Dominus {
 			}
 		}
 	}
-	bool CPU::parser(string s) {
-		string input = split(s, 0);
+	bool CPU::parser(string input) {
+		string s = split(input, 0);
 		if (s == "BEGIN") {
 			_begin.run(&begin_flag);
 		}
@@ -59,9 +60,9 @@ namespace Dominus {
 		}
 		else if (begin_flag) {
 			if (s == "PUSH") {
-				string typ = split(s, 1);
+				string typ = split(input, 1);
 				Memory value;
-				string str = split(s, 2);
+				string str = split(input, 2);
 				if (typ == "int") {
 					long long int dig = atoi(str.c_str());
 					value.set_int_value(dig);
@@ -78,11 +79,40 @@ namespace Dominus {
 				_add.run(stack);
 			}
 			else if (s == "LABEL") {
-				string str = split(s, 1);
+				string str = split(input, 1);
 				_label.run(stack,stack_point, str);
 			}
 			else if (s == "OUT") {
 				_out.run(stack);
+			}
+			else if (s == "JEQ"||s=="JNE") {
+				string str_label = split(input, 1);
+				while (true)
+				{
+					long long int pos = stack.get_index();
+					stack.print();
+					long long int iter=-1;
+					if (s == "JEQ") {
+						iter=_jeq.run(stack, stack_point, str_label);
+					}else if (s == "JNE"){
+						iter=_jne.run(stack, stack_point, str_label);
+					}
+					if (iter == -1) {
+						break;
+					}
+					string str;
+					for (;iter < pos; ++iter) {
+						if (stack[iter].get_string_value() == "") {
+							str = "PUSH int " + to_string(stack[iter].get_int_value());
+						}
+						else {
+							str = stack[iter].get_string_value();
+						}
+						parser(str);
+						//stack.print();
+					}
+					stack_point[str_label] = pos-1;
+				}
 			}
 		}
 		return true;
@@ -94,7 +124,7 @@ namespace Dominus {
 		string key = "";
 		while (key != "END")
 		{
-			string key = input(file);
+			key = input(file);
 			parser(key);
 		}
 		return true;

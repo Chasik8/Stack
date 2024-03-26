@@ -1,6 +1,8 @@
 BEGIN
-PUSH int 12
-PUSH int 13
-PUSH int 14
+PUSH int 1
+LABEL A
+PUSH int 1
 ADD
+PUSH int 5
+JNE A
 END

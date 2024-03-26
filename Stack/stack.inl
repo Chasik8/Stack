@@ -78,6 +78,9 @@ namespace Dominus {
 			else if (index == len) {
 				Type* arr_old = arr;
 				arr = new Type[2 * len];
+				for (long long int i = 0; i < index; ++i) {
+					arr[i] = arr_old[i];
+				}
 				delete[] arr_old;
 				len *= 2;
 				arr[index] = inp;
@@ -127,7 +130,12 @@ namespace Dominus {
 	bool Stack<Type>::print() {
 		try {
 			for (long long int i = 0; i < index; ++i) {
-				cout << arr[i] << " ";
+				if (arr[i].get_string_value() == "") {
+					cout << arr[i].get_int_value() << endl;
+				}
+				else {
+					cout << arr[i].get_string_value() << endl;
+				}
 			}
 			return true;
 		}
@@ -150,5 +158,15 @@ namespace Dominus {
 	template<typename Type>
 	long long int Stack<Type>::get_index() {
 		return index;
+	}
+	template<typename Type>
+	Type Stack<Type>::operator[](long long int i) {
+		try {
+			Type a= arr[i];
+			return arr[i];
+		}
+		catch (...) {
+			return *new Type;
+		}
 	}
 }
