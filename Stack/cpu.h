@@ -20,9 +20,10 @@ namespace Dominus {
         Label _label;
         Jeq _jeq;
         Jne _jne;
+        Del _del;
     public:
         CPU();
-        //~CPU();
+        ~CPU();
         bool run();
         std::string input(ifstream& file);
         bool parser(string s);

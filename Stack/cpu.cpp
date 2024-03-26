@@ -16,9 +16,24 @@ namespace Dominus {
 		_out = *new Out;
 		_jeq = *new Jeq;
 		_jne = *new Jne;
+		_del = *new Del;
 		//commands = {
 		//	{"BEGIN",new Token(TokenType::Begin,new Begin)}
 		//}
+	}
+	CPU::~CPU() {
+		delete &stack;
+		delete& stack_point;
+		delete& _begin;
+		delete& _end;
+		delete& _push;
+		delete& _add;
+		delete& _pop;
+		delete& _out;
+		delete& _label;
+		delete& _jeq;
+		delete& _jne;
+		delete& _del;
 	}
 	string CPU::input(ifstream& file) {
 		string str;
@@ -85,12 +100,15 @@ namespace Dominus {
 			else if (s == "OUT") {
 				_out.run(stack);
 			}
+			else if (s == "DEL") {
+				_del.run(stack);
+			}
 			else if (s == "JEQ"||s=="JNE") {
 				string str_label = split(input, 1);
 				while (true)
 				{
 					long long int pos = stack.get_index();
-					stack.print();
+					//stack.print();
 					long long int iter=-1;
 					if (s == "JEQ") {
 						iter=_jeq.run(stack, stack_point, str_label);
@@ -118,8 +136,8 @@ namespace Dominus {
 		return true;
 	}
 	bool CPU::run() {
-		string inp="input.txt";
-		//cin >> inp;
+		string inp;
+		cin >> inp;
 		ifstream file(inp);
 		string key = "";
 		while (key != "END")

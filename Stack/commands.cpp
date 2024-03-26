@@ -85,8 +85,17 @@ namespace Dominus {
 			else {
 				std::cout << stack.pop().get_int_value() << std::endl;
 			}
-			Memory add("OUT");
-			stack.push(add);
+			//Memory add("OUT");
+			//stack.push(add);
+			return true;
+		}
+		catch (...) {
+			return false;
+		}
+	}
+	bool Del::run(Stack<Memory>& stack) {
+		try {
+			stack.pop();
 			return true;
 		}
 		catch (...) {

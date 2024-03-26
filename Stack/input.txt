@@ -5,4 +5,7 @@ PUSH int 1
 ADD
 PUSH int 5
 JNE A
+DEL
+DEL
+OUT
 END
