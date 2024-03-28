@@ -1,5 +1,5 @@
 #pragma once
-#include"stack.h"
+#include"stack.hpp"
 //#include"cpu.h"
 #include"memory.h"
 namespace Dominus {

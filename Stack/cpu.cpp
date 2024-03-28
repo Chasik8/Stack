@@ -1,4 +1,4 @@
-#include"stack.h"
+#include"stack.hpp"
 #include"cpu.h"
 #include <fstream>
 #define _CRT_DISABLE_PERFCRIT_LOCKS
@@ -17,9 +17,6 @@ namespace Dominus {
 		_jeq = *new Jeq;
 		_jne = *new Jne;
 		_del = *new Del;
-		//commands = {
-		//	{"BEGIN",new Token(TokenType::Begin,new Begin)}
-		//}
 	}
 	CPU::~CPU() {
 		delete &stack;
@@ -120,11 +117,11 @@ namespace Dominus {
 					}
 					string str;
 					for (;iter < pos; ++iter) {
-						if (stack[iter].get_string_value() == "") {
-							str = "PUSH int " + to_string(stack[iter].get_int_value());
+						if (stack.get(iter).get_string_value() == "") {
+							str = "PUSH int " + to_string(stack.get(iter).get_int_value());
 						}
 						else {
-							str = stack[iter].get_string_value();
+							str = stack.get(iter).get_string_value();
 						}
 						parser(str);
 						//stack.print();

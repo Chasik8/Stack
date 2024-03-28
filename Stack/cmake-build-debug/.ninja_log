@@ -1,0 +1,12 @@
+# ninja log v5
+16	503	7333514365765104	CMakeFiles/Source.dir/memory.cpp.obj	b95afe0405754589
+937	1497	7333514375628897	Source.exe	9ee3b778bf95f938
+10	722	7333514367951096	CMakeFiles/Source.dir/Program.cpp.obj	8f573d07f8fce49d
+6	898	7333514369686970	CMakeFiles/Source.dir/commands.cpp.obj	5af50f36a46c7ef8
+1	934	7333514370056982	CMakeFiles/Source.dir/cpu.cpp.obj	a6c8808e2cf995f
+2	188	7333514590709881	build.ninja	59f22da09fd55c8d
+11	661	7333514614284013	CMakeFiles/CPU.dir/memory.cpp.obj	7b54b5ae96eb4a52
+17	876	7333514616439704	CMakeFiles/CPU.dir/Program.cpp.obj	bdee4e16d10df665
+7	1033	7333514618005639	CMakeFiles/CPU.dir/commands.cpp.obj	28d666be9a28fa96
+1	1069	7333514618355996	CMakeFiles/CPU.dir/cpu.cpp.obj	bc61c159e5759c5d
+1073	1604	7333514623655751	CPU.exe	2470a4c49e42409b

@@ -138,10 +138,7 @@
     <ClInclude Include="commands.h" />
     <ClInclude Include="cpu.h" />
     <ClInclude Include="memory.h" />
-    <ClInclude Include="stack.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="stack.inl" />
+    <ClInclude Include="stack.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #include "commands.h"
 #include "cpu.h"
 #include "memory.h"
+#include "stack.hpp"
 	//class Dominus::Push {
 	//public:
 	//	bool run(Stack<Memory> stack, Memory value) {
@@ -107,16 +108,16 @@ namespace Dominus {
 			long long int index_search = stack.get_index()-1;
 			Memory first;
 			for (;; --index_search) {
-				first = stack[index_search];
-				if (stack[index_search].get_string_value() == "") {
+				first = stack.get(index_search);
+				if (stack.get(index_search).get_string_value() == "") {
 					break;
 				}
 			}
 			--index_search;
 			Memory second;
 			for (;; --index_search) {
-				second = stack[index_search];
-				if (stack[index_search].get_string_value() == "") {
+				second = stack.get(index_search);
+				if (stack.get(index_search).get_string_value() == "") {
 					break;
 				}
 			}
@@ -143,16 +144,16 @@ namespace Dominus {
 			long long int index_search = stack.get_index() - 1;
 			Memory first;
 			for (; index_search >= 0; --index_search) {
-				first = stack[index_search];
-				if (stack[index_search].get_string_value() == "") {
+				first = stack.get(index_search);
+				if (stack.get(index_search).get_string_value() == "") {
 					break;
 				}
 			}
 			--index_search;
 			Memory second;
 			for (; index_search>=0; --index_search) {
-				second = stack[index_search];
-				if (stack[index_search].get_string_value() == "") {
+				second = stack.get(index_search);
+				if (stack.get(index_search).get_string_value() == "") {
 					break;
 				}
 			}

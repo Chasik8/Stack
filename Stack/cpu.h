@@ -1,5 +1,5 @@
 #pragma once
-#include"stack.h"
+#include"stack.hpp"
 #include <fstream>
 #include<string>
 #include"commands.h"

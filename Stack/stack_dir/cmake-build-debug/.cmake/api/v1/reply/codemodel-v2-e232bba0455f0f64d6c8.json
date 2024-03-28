@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.9"
@@ -19,7 +19,7 @@
 					]
 				}
 			],
-			"name" : "Release",
+			"name" : "Debug",
 			"projects" : 
 			[
 				{
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "Class::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Class-Release-607672bde8a426a8965d.json",
-					"name" : "Class",
+					"id" : "STACK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-STACK-Debug-1d8fed049c80b91014ea.json",
+					"name" : "STACK",
 					"projectIndex" : 0
 				}
 			]
@@ -49,7 +49,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Project/C++/VisualStudioproject/C++/HSE/algoritms/Stack/Stack/stack_dir/cmake-build-release",
+		"build" : "D:/Project/C++/VisualStudioproject/C++/HSE/algoritms/Stack/Stack/stack_dir/cmake-build-debug",
 		"source" : "D:/Project/C++/VisualStudioproject/C++/HSE/algoritms/Stack/Stack/stack_dir"
 	},
 	"version" : 
