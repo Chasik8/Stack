@@ -6,6 +6,7 @@
 #include<map>
 #define _CRT_DISABLE_PERFCRIT_LOCKS
 #include<string>
+#include <memory>
 using namespace std;
 namespace Dominus {
 
