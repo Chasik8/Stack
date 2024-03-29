@@ -15,18 +15,21 @@
 	//	}
 	//};
 namespace Dominus {
-	bool Begin::run(bool* begin_flag) {
+	long long int Commands::run(Batch& input) {
+		return 1;
+	}
+	long long int Begin::run(Batch& input) {
 		try {
-			*begin_flag = true;
+			*input.begin_flag = true;
 			return true;
 		}
 		catch (...) {
 			return false;
 		}
 	}
-	bool End::run(bool* begin_flag) {
+	long long int End::run(Batch& input) {
 		try {
-			*begin_flag = false;
+			*input.begin_flag = false;
 			return true;
 		}
 		catch (...) {
@@ -34,20 +37,20 @@ namespace Dominus {
 		}
 	}
 
-	bool Push::run(Stack<Memory>& stack, Memory value) {
+	long long int Push::run(Batch& input) {
 		try {
-			stack.push(value);
+			(*input.stack).push(*input.value);
 			return true;
 		}
 		catch (...) {
 			return false;
 		}
 	}
-	bool Pop::run(Stack<Memory>& stack) {
+	long long int Pop::run(Batch& input) {
 		try {
-			stack.pop();
+			(*input.stack).pop();
 			Memory add("POP");
-			stack.push(add);
+			(*input.stack).push(add);
 			return true;
 		}
 		catch (...) {
@@ -55,36 +58,36 @@ namespace Dominus {
 			return false;
 		}
 	}
-	bool Add::run(Stack<Memory>& stack) {
+	long long int Add::run(Batch& input) {
 		try {
-			Memory first = stack.pop();
-			Memory second = stack.top();
-			stack.push(first);
-			stack.push(*new Memory(first.get_int_value() + second.get_int_value()));
+			Memory first = (*input.stack).pop();
+			Memory second = (*input.stack).top();
+			(*input.stack).push(first);
+			(*input.stack).push(*new Memory(first.get_int_value() + second.get_int_value()));
 			Memory add("ADD");
-			stack.push(add);
+			(*input.stack).push(add);
 			return true;
 		}
 		catch (...) {
 			return false;
 		}
 	}
-	bool Label::run(Stack<Memory>& stack, map<string, long long int>& stack_point,string label) {
+	long long int Label::run(Batch& input) {
 		try {
-			stack_point[label]= stack.get_index();
+			(*input.stack_point)[*input.label]= (*input.stack).get_index();
 			return true;
 		}
 		catch (...) {
 			return false;
 		}
 	}
-	bool Out::run(Stack<Memory>& stack) {
+	long long int Out::run(Batch& input) {
 		try {
-			if (stack.top().get_string_value() != "") {
-				std::cout << stack.pop().get_string_value() << std::endl;
+			if ((*input.stack).top().get_string_value() != "") {
+				std::cout << (*input.stack).pop().get_string_value() << std::endl;
 			}
 			else {
-				std::cout << stack.pop().get_int_value() << std::endl;
+				std::cout << (*input.stack).pop().get_int_value() << std::endl;
 			}
 			//Memory add("OUT");
 			//stack.push(add);
@@ -94,30 +97,30 @@ namespace Dominus {
 			return false;
 		}
 	}
-	bool Del::run(Stack<Memory>& stack) {
+	long long int Del::run(Batch& input) {
 		try {
-			stack.pop();
+			(*input.stack).pop();
 			return true;
 		}
 		catch (...) {
 			return false;
 		}
 	}
-	long long int Jeq::run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label) {
+	long long int Jeq::run(Batch& input) {
 		try {
-			long long int index_search = stack.get_index()-1;
+			long long int index_search = (*input.stack).get_index()-1;
 			Memory first;
 			for (;; --index_search) {
-				first = stack.get(index_search);
-				if (stack.get(index_search).get_string_value() == "") {
+				first = (*input.stack).get(index_search);
+				if ((*input.stack).get(index_search).get_string_value() == "") {
 					break;
 				}
 			}
 			--index_search;
 			Memory second;
 			for (;; --index_search) {
-				second = stack.get(index_search);
-				if (stack.get(index_search).get_string_value() == "") {
+				second = (*input.stack).get(index_search);
+				if ((*input.stack).get(index_search).get_string_value() == "") {
 					break;
 				}
 			}
@@ -125,7 +128,7 @@ namespace Dominus {
 				if (first.get_int_value() == second.get_int_value()) {
 					//Memory add("JEQ " + label);
 					//stack.push(add);
-					return stack_point[label];
+					return (*input.stack_point)[*input.label];
 				}
 				else {
 					return -1;
@@ -139,21 +142,21 @@ namespace Dominus {
 			return -1;
 		}
 	}
-	long long int Jne::run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label) {
+	long long int Jne::run(Batch& input) {
 		try {
-			long long int index_search = stack.get_index() - 1;
+			long long int index_search = (*input.stack).get_index() - 1;
 			Memory first;
 			for (; index_search >= 0; --index_search) {
-				first = stack.get(index_search);
-				if (stack.get(index_search).get_string_value() == "") {
+				first = (*input.stack).get(index_search);
+				if ((*input.stack).get(index_search).get_string_value() == "") {
 					break;
 				}
 			}
 			--index_search;
 			Memory second;
 			for (; index_search>=0; --index_search) {
-				second = stack.get(index_search);
-				if (stack.get(index_search).get_string_value() == "") {
+				second = (*input.stack).get(index_search);
+				if ((*input.stack).get(index_search).get_string_value() == "") {
 					break;
 				}
 			}
@@ -161,7 +164,7 @@ namespace Dominus {
 				if (first.get_int_value() != second.get_int_value()) {
 					//Memory add("JEQ " + label);
 					//stack.push(add);
-					return stack_point[label];
+					return (*input.stack_point)[*input.label];
 				}
 				else {
 					return -1;

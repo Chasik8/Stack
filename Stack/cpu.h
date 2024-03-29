@@ -10,17 +10,8 @@ namespace Dominus {
         Stack<Memory> stack;
         map<std::string, long long int> stack_point;
         bool begin_flag;
-        //map<string, Token> commands;
-        Begin _begin;
-        End _end;
-        Push _push;
-        Add _add;
-        Pop _pop;
-        Out _out;
-        Label _label;
-        Jeq _jeq;
-        Jne _jne;
-        Del _del;
+        map<string,shared_ptr< Commands>> commands;
+        Batch batch;
     public:
         CPU();
         ~CPU();

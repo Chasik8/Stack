@@ -3,62 +3,56 @@
 //#include"cpu.h"
 #include"memory.h"
 namespace Dominus {
-	//class Element {
-	//public:
-	//	virtual void print() const = 0;
-	//	virtual ~Element() {}
-	//};
-	//enum class TokenType {
-	//	Begin,
-	//	End,
-	//};
+	struct Batch {
+		bool* begin_flag;
+		Stack<Memory>* stack;
+		map<string, long long int>* stack_point;
+		Memory* value;
+		string* label;
+	};
+	class Commands {
+	public:
+		virtual long long int run(Batch& input) ;
+	};
 
-	//class Token {
-	//private:
-	//	std::string value;
-	//	TokenType type;
-	//public:
-	//	Token(TokenType type, Element* element) : type(type), element(element) {}
-	//};
-
-	class Begin {
+	class Begin: public Commands {
 	public:
-		bool run(bool* begin_flag);
+		long long int run(Batch& input) override;
 	};
-	class End {
+	class End:public Commands {
 	public:
-		bool run(bool* begin_flag);
+		long long int run(Batch& input) override;
 	};
-	class Push {
+	class Push:public Commands {
 	public:
-		bool run(Stack<Memory>& stack, Memory value) ;
+		long long int run(Batch& input) override;
 	};
-	class Pop {
+	class Pop:public Commands {
 	public:
-		bool run(Stack<Memory> &stack);
+		long long int run(Batch& input)override;
 	};
-	class Add {
+	class Add:public Commands {
 	public:
-		bool run(Stack<Memory>& stack);
+		long long int run(Batch& input)override;
 	};
-	class Label {
+	class Label:public Commands {
 	public:
-		bool run(Stack<Memory>& stack, map<string,long long int>& stack_point, string label);
+		long long int run(Batch& input)override;
 	};
-	class Out {
+	class Out:public Commands {
 	public:
-		bool run(Stack<Memory>& stack);
+		long long int run(Batch& input)override;
 	};
-	class Jeq {
+	class Jeq:public Commands {
 	public:
-		long long int run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label);
+		long long int run(Batch& input)override;
 	};
-	class Jne {
+	class Jne:public Commands {
 	public:
-		long long int run(Stack<Memory>& stack, map<string, long long int>& stack_point, string label);
+		long long int run(Batch& input)override;
 	};
-	class Del {
+	class Del:public Commands {
 	public:
-		bool run(Stack<Memory>& stack);
+		long long int run(Batch& input)override;
 	};
 }

@@ -9,28 +9,28 @@ namespace Dominus {
 		begin_flag = false;
 		stack = *new Stack<Memory>;
 		stack_point = *new map<std::string,long long int>;
-		_begin = *new Begin;
-		_end = *new End;
-		_push = *new Push;
-		_add = *new Add;
-		_out = *new Out;
-		_jeq = *new Jeq;
-		_jne = *new Jne;
-		_del = *new Del;
+		commands = {
+			{"_begin", make_shared<Begin>()},
+			{"_end", make_shared<End>()},
+			{"_push", make_shared<Push>()},
+			{"_add", make_shared<Add>()},
+			{"_pop", make_shared<Pop>()},
+			{"_out", make_shared<Out>()},
+			{"_label", make_shared<Label>()},
+			{"_jeq", make_shared<Jeq>()},
+			{"_jne", make_shared<Jne>()},
+			{"_del", make_shared<Del>()},
+
+		};
+		batch = {
+			&begin_flag,
+			&stack,
+			&stack_point
+		};
 	}
 	CPU::~CPU() {
 		delete &stack;
 		delete& stack_point;
-		delete& _begin;
-		delete& _end;
-		delete& _push;
-		delete& _add;
-		delete& _pop;
-		delete& _out;
-		delete& _label;
-		delete& _jeq;
-		delete& _jne;
-		delete& _del;
 	}
 	string CPU::input(ifstream& file) {
 		string str;
@@ -65,10 +65,10 @@ namespace Dominus {
 	bool CPU::parser(string input) {
 		string s = split(input, 0);
 		if (s == "BEGIN") {
-			_begin.run(&begin_flag);
+			commands["_begin"]->run(batch);
 		}
 		else if (s == "END") {
-			_end.run(&begin_flag);
+			commands["_end"]->run(batch);
 		}
 		else if (begin_flag) {
 			if (s == "PUSH") {
@@ -82,23 +82,25 @@ namespace Dominus {
 				else {
 					value.set_string_value(str);
 				}
-				_push.run(stack, value);
+				batch.value = &value;
+				commands["_push"]->run(batch);
 			}
 			else if (s == "POP") {
-				_pop.run(stack);
+				commands["_pop"] -> run(batch);
 			}
 			else if (s == "ADD") {
-				_add.run(stack);
+				commands["_add"]->run(batch);
 			}
 			else if (s == "LABEL") {
 				string str = split(input, 1);
-				_label.run(stack,stack_point, str);
+				batch.label = &str;
+				commands["_label"]->run(batch);
 			}
 			else if (s == "OUT") {
-				_out.run(stack);
+				commands["_out"]->run(batch);
 			}
 			else if (s == "DEL") {
-				_del.run(stack);
+				commands["_del"]->run(batch);
 			}
 			else if (s == "JEQ"||s=="JNE") {
 				string str_label = split(input, 1);
@@ -107,10 +109,11 @@ namespace Dominus {
 					long long int pos = stack.get_index();
 					//stack.print();
 					long long int iter=-1;
+					batch.label = &str_label;
 					if (s == "JEQ") {
-						iter=_jeq.run(stack, stack_point, str_label);
+						iter= commands["_jeq"]->run(batch);
 					}else if (s == "JNE"){
-						iter=_jne.run(stack, stack_point, str_label);
+						iter= commands["_jne"]->run(batch);
 					}
 					if (iter == -1) {
 						break;
